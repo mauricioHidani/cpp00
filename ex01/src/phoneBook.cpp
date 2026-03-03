@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 08:17:57 by mhidani           #+#    #+#             */
-/*   Updated: 2026/03/03 08:26:46 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/03 08:33:46 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ PhoneBook::PhoneBook()
 
 PhoneBook::~PhoneBook()
 {
+	std::cout << "Phone Book has been destroyed" << std::endl;
 }
 
 int	PhoneBook::getIndex() const

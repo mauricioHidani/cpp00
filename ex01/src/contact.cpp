@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:04:10 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/28 09:20:59 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/03 08:33:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Contact::Contact(std::string &name, std::string &lastname,
 
 Contact::~Contact()
 {
+	std::cout << "Contact has been destroyed" << std::endl;
 }
 
 std::string	Contact::getName() const
