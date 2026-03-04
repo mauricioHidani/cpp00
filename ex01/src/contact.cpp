@@ -6,20 +6,13 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 17:04:10 by mhidani           #+#    #+#             */
-/*   Updated: 2026/03/03 08:33:50 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/04 11:30:57 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
 Contact::Contact()
-{
-}
-
-Contact::Contact(std::string &name, std::string &lastname, 
-				 std::string &nickname, std::string &contact, 
-				 std::string &secret) : _name(name), _lastname(lastname), 
-				 _nickname(nickname), _contact(contact), _secret(secret)
 {
 }
 
@@ -81,22 +74,17 @@ void	Contact::setSecret(const std::string &secret)
 
 void	Contact::print(const size_t index, const size_t col)
 {
-	std::string	name = (
-		_name.length() > col ? 
-			_name.substr(0, col - 1) + "." : _name
-	);
-	std::string	lastname = (
-		_lastname.length() > col ?
-			_lastname.substr(0, col - 1) + ".": _lastname
-	);
-	std::string	contact = (
-		_contact.length() > col ? 
-			_contact.substr(0, col - 1) + "." : _contact
-	);
-	
-	std::cout << index << "|";
-	std::cout << std::setw(col) << name << "|";
-	std::cout << std::setw(col) << lastname << "|";
-	std::cout << std::setw(col) << contact;
+	std::cout << std::setw(col) << index + 1 << "|";
+	std::cout << std::setw(col) << limitColumn(_name, col) << "|";
+	std::cout << std::setw(col) << limitColumn(_lastname, col) << "|";
+	std::cout << std::setw(col) << limitColumn(_nickname, col) << "|";
+	std::cout << std::setw(col) << limitColumn(_contact, col);
 	std::cout << std::endl;
+}
+
+std::string	Contact::limitColumn(std::string str, const size_t col)
+{
+	if (str.length() > col)
+		return (str.substr(0, col - 1) + ".");
+	return (str);
 }

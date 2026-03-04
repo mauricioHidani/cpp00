@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 23:53:57 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/28 09:19:29 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/04 11:22:33 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ private:
 	std::string	_contact;
 	std::string	_secret;
 
+protected:
+	std::string	limitColumn(std::string str, const size_t col);
+
 public:
 	Contact();
-	Contact(std::string &name, std::string &lastname, std::string &nickname, 
-			std::string &contact, std::string &secret);
 	~Contact();
 
 	std::string	getName() const;
