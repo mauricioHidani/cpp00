@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:16:57 by mhidani           #+#    #+#             */
-/*   Updated: 2026/03/05 22:28:25 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/06 08:53:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ Account::Account( int initial_deposit )
 	_nbWithdrawals = 0;
 	
 	_nbAccounts++;
+	_totalAmount += initial_deposit;
 	
 	std::cout	<< "index:"		<< _accountIndex	<< ";";
 	std::cout	<< "amount:"	<< _amount			<< ";";
