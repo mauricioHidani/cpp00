@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/24 10:33:07 by mhidani           #+#    #+#              #
-#    Updated: 2026/02/24 19:48:52 by mhidani          ###   ########.fr        #
+#    Updated: 2026/03/06 09:00:08 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(OBJ_DIR):
 	@echo "$@: directory was created 📁"
 
 banner:
-	@echo "CPP-00 (Milestone 4)"
+	@echo "CPP-00 Exercise 00 (Milestone 4)"
 	@echo "$(NAME) - $(VERSION), $(LOCAL)"
 	@echo "$(AUTHOR) - $(SINCE)"
 

@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/03 08:27:25 by mhidani           #+#    #+#              #
-#    Updated: 2026/03/03 17:19:52 by mhidani          ###   ########.fr        #
+#    Updated: 2026/03/06 08:59:43 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC			= $(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			= $(addprefix $(OBJ_DIR)/, $(FILES:.cpp=.o))
 
 CPP			= c++
-CPPFLAGS	= -g -Wall -Wextra -Werror -std=c++98
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 CPPINC		= -I $(INC_DIR)/
 MKDIR		= mkdir
 MKDFLAGS	= --parents
