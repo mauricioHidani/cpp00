@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phoneBook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 08:17:57 by mhidani           #+#    #+#             */
-/*   Updated: 2026/03/04 11:30:35 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/03/11 15:22:55 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	PhoneBook::addIndex()
 {
 	if (_index >= 7)
 	{
-		_index = 7;
+		_index = 0;
 		return ;
 	}
 	_index++;
@@ -69,8 +69,7 @@ void	PhoneBook::printHeader()
 	std::cout << std::setw(COL) << "index" << "|";
 	std::cout << std::setw(COL) << "name" << "|";
 	std::cout << std::setw(COL) << "lastname" << "|";
-	std::cout << std::setw(COL) << "nickname" << "|";
-	std::cout << std::setw(COL) << "contact" << std::endl;
+	std::cout << std::setw(COL) << "nickname" << std::endl;
 }
 
 void	PhoneBook::searchByIndex()
@@ -83,12 +82,7 @@ void	PhoneBook::searchByIndex()
 	if (!std::getline(std::cin, input))
 		return ;
 	if (input.empty())
-	{
-		printHeader();
-		for (size_t i = 0; i < 8; i++)
-			_contacts[i].print(i, COL);
 		return ;
-	}
 	target = std::atoi(input.c_str());
 	if (target < 0 || target > 8)
 	{
@@ -97,7 +91,8 @@ void	PhoneBook::searchByIndex()
 	}
 	printHeader();
 	index = static_cast<size_t>(target) - 1;
-	_contacts[index].print(index, COL);
+	if (!_contacts[index].getName().empty())
+		_contacts[index].print(index, COL);
 }
 
 void	PhoneBook::searchByName()
@@ -108,12 +103,7 @@ void	PhoneBook::searchByName()
 	if (!std::getline(std::cin, input))
 		return ;
 	if (input.empty())
-	{
-		printHeader();
-		for (size_t i = 0; i < 8; i++)
-			_contacts[i].print(i, COL);
 		return ;
-	}
 	printHeader();
 	for (size_t i = 0; i < 8; i++)
 		if (_contacts[i].getName().compare(input) == 0)
@@ -128,12 +118,7 @@ void	PhoneBook::searchByLastname()
 	if (!std::getline(std::cin, input))
 		return ;
 	if (input.empty())
-	{
-		printHeader();
-		for (size_t i = 0; i < 8; i++)
-			_contacts[i].print(i, COL);
 		return ;
-	}
 	printHeader();
 	for (size_t i = 0; i < 8; i++)
 		if (_contacts[i].getLastname().compare(input) == 0)
@@ -148,12 +133,7 @@ void	PhoneBook::searchByNickname()
 	if (!std::getline(std::cin, input))
 		return ;
 	if (input.empty())
-	{
-		printHeader();
-		for (size_t i = 0; i < 8; i++)
-			_contacts[i].print(i, COL);
 		return ;
-	}
 	printHeader();
 	for (size_t i = 0; i < 8; i++)
 		if (_contacts[i].getNickname().compare(input) == 0)
@@ -168,12 +148,7 @@ void	PhoneBook::searchByContact()
 	if (!std::getline(std::cin, input))
 		return ;
 	if (input.empty())
-	{
-		printHeader();
-		for (size_t i = 0; i < 8; i++)
-			_contacts[i].print(i, COL);
 		return ;
-	}
 	printHeader();
 	for (size_t i = 0; i < 8; i++)
 		if (_contacts[i].getContact().compare(input) == 0)
@@ -183,48 +158,52 @@ void	PhoneBook::searchByContact()
 
 void	PhoneBook::search()
 {
+	std::string	types[] = {"INDEX", "NAME", "LASTNAME", "NICKNAME", "CONTACT"};
+	void		(PhoneBook::*search[])() = {
+		&PhoneBook::searchByIndex, 
+		&PhoneBook::searchByName, 
+		&PhoneBook::searchByLastname, 
+		&PhoneBook::searchByNickname, 
+		&PhoneBook::searchByContact
+	};
 	std::string	input;
 
-	std::cout << "Enter the search type by typing your choice:" << std::endl;
-	std::cout << "- INDEX" << std::endl;
-	std::cout << "- NAME" << std::endl;
-	std::cout << "- LASTNAME" << std::endl;
-	std::cout << "- NICKNAME" << std::endl;
-	std::cout << "- CONTACT" << std::endl;
-	std::cout << "> ";
-	if (!std::getline(std::cin, input))
-		return ;
-	if (input.empty())
+	while (true)
 	{
 		printHeader();
-		for (size_t i = 0; i < 8; i++)
+		for (size_t i = 0; i < 8 && !_contacts[i].getName().empty(); i++)
 			_contacts[i].print(i, COL);
-		return ;
+		std::cout << "Enter the search type by typing your choice:" << std::endl;
+		std::cout << "- INDEX" << std::endl;
+		std::cout << "- NAME" << std::endl;
+		std::cout << "- LASTNAME" << std::endl;
+		std::cout << "- NICKNAME" << std::endl;
+		std::cout << "- CONTACT" << std::endl;
+		std::cout << "> ";
+		if (!std::getline(std::cin, input))
+			return ;
+		for (int i = 0; i < 5; i++)
+		{
+			if (input.compare(types[i]) == 0)
+			{
+				(this->*search[i])();
+				return ;
+			}
+		}
 	}
-	if (input.compare("INDEX") == 0)
-		searchByIndex();
-	else if (input.compare("NAME") == 0)
-		searchByName();
-	else if (input.compare("LASTNAME") == 0)
-		searchByLastname();
-	else if (input.compare("NICKNAME") == 0)
-		searchByNickname();
-	else if (input.compare("CONTACT") == 0)
-		searchByContact();
 }
 
 void	PhoneBook::add()
 {
 	std::string	cs[5] = {"Name", "Lastname", "Nickname", "Contact", "Secret"};
 	std::string	input = "";
-	size_t		idx = _index == 7 ? 0 : _index;
 	size_t		i = 0;
 
 	while (i < 5)
 	{
 		std::cout << cs[i] << ": ";
 		if (!std::getline(std::cin, input))
-			continue ;
+			return ;
 		if (input.empty())
 		{
 			std::cout << cs[i] << " field is required!" << std::endl;
@@ -232,12 +211,12 @@ void	PhoneBook::add()
 		}
 		switch (i)
 		{
-			case 0:	_contacts[idx].setName(input);		break;
-			case 1:	_contacts[idx].setLastname(input);	break;
-			case 2: _contacts[idx].setNickname(input);	break;
-			case 3: _contacts[idx].setContact(input);	break;
-			case 4: _contacts[idx].setSecret(input);	break;
-			default: 									break;
+			case 0:	_contacts[_index].setName(input);		break;
+			case 1:	_contacts[_index].setLastname(input);	break;
+			case 2: _contacts[_index].setNickname(input);	break;
+			case 3: _contacts[_index].setContact(input);	break;
+			case 4: _contacts[_index].setSecret(input);		break;
+			default: 										break;
 		}
 		i++;
 	}

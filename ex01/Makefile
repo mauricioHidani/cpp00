@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+         #
+#    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/03 08:27:25 by mhidani           #+#    #+#              #
-#    Updated: 2026/03/06 08:59:43 by mhidani          ###   ########.fr        #
+#    Updated: 2026/03/11 15:11:00 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_DIR		= src
 INC_DIR		= include
 OBJ_DIR		= obj
 
-FILES		= phoneBook.cpp contact.cpp main.cpp
+FILES		= PhoneBook.cpp Contact.cpp main.cpp
 SRC			= $(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			= $(addprefix $(OBJ_DIR)/, $(FILES:.cpp=.o))
 
